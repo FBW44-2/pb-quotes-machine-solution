@@ -24,7 +24,7 @@ class QuoteMachine {
     }
 
     getRandomQuote() {
-        const randomIndex = Math.ceil(Math.random() * (this.quotesList.length - 0) + 0);
+        const randomIndex = Math.floor(Math.random() * quotesPool.length);
         const quote = this.quotesList[randomIndex];
 
         return `\n${quote.text} \n- ${quote.author}\n`;
@@ -32,6 +32,18 @@ class QuoteMachine {
 
     getTotalQuotesCount() {
         return `\nHey, I am the Quote Machine. I hold ${this.quotesList.length} quotes about programming.\n`;
+    }
+
+    getQuoteById(id) {
+        const quote = this.quotesList.filter((quote) => {
+            return quote.id === id;
+        });
+
+        if (quote.length) {
+            return quote[0];
+        }
+
+        return `Sorry, there is no quote with id ${id}`;
     }
 
     getQuotesByAuthorName(author) {
